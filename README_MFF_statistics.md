@@ -40,7 +40,7 @@ The second script reads the control-model results from `../mff_benchmark/results
 ### Summary of the method (SI section "Comparison with MFF")
 
 - **Features.** MFF of Sandfort et al.: 24 RDKit fingerprints per molecule (RDKit topological, branched and linear, path lengths 2/4/6/8; Morgan with and without feature invariants, radii 0/2/4/6; layered, path lengths 2/4/6/8; Avalon; MACCS; hashed atom pairs; hashed topological torsions), each with 3096 bits (MACCS: 167 bits, of which bit 0 is always zero), giving the 71,374 bits per molecule of the original work. The fingerprints of all reaction components included in the datasets (substrates, reagents, catalysts, and solvents) were concatenated, and features that were constant across each dataset were removed. As reaction components varied in the DeaminoCpl and UmAS datasets, the resulting MFF representations could contain information beyond the substrate structures used in SBR.
-- **Encoder validation.** `mff/encoder.py` was checked to be bit-identical to the `FingerprintGenerator` of EasyChemML, the authors' public code (`scripts/check_equivalence_easychemml.py`; clone EasyChemML and run it). On the Buchwald-Hartwig data of Ahneman et al. (`data/reference/`) it reproduces the R² reported in the original SI (split 1: 0.920 here versus 0.921; `scripts/validate_doyle.py`).
+- **Encoder validation.** `mff/encoder.py` was checked to be bit-identical to the `FingerprintGenerator` of EasyChemML, the authors' public code (`scripts/check_equivalence_easychemml.py`; clone EasyChemML and run it). The encoder was additionally validated using the Buchwald–Hartwig dataset of Ahneman et al., reproducing the R² reported in the original SI (split 1: 0.920 here versus 0.921; `scripts/validate_doyle.py`). The reference dataset is not redistributed in this repository; see the instructions below.
 - **Model.** `RandomForestRegressor(max_features=all features, max_depth=10000, min_samples_split=2)` as in the original work, 1000 trees, `random_state=42`. The original work chose 5000 or 10,000 trees by inner cross-validation; at n = 70-130 the extra trees change only the run time, so the number was fixed.
 - **Splits.** Identical to SBR: `train_test_split(np.arange(n), test_size=0.30, random_state=seed)`, seeds 0-9, rows in data-sheet order.
 - **Control models** (to separate the effect of the representation from that of the regressor): MFF features + ElasticNetCV (5-fold, l1_ratio in {0.1, 0.5, 0.9}, 20 values of alpha), and the SBR-2 features (Morgan count fingerprint, radius 2, 2048 bits, summed over the two substrates) + the same random forest.
@@ -58,12 +58,30 @@ The second script reads the control-model results from `../mff_benchmark/results
 | `scripts/validate_doyle.py` | Reproduction check on the Buchwald-Hartwig data |
 | `scripts/check_equivalence_easychemml.py` | Bit-level check against EasyChemML |
 | `data/raw/`, `data/clean/` | Data sheets provided by S. Shiomi and the cleaned CSV files |
-| `data/reference/Dreher_and_Doyle_input_data.xlsx` | Buchwald-Hartwig data shipped with EasyChemML (validation only) |
+| `data/reference/Dreher_and_Doyle_input_data.xlsx` | Optional external reference dataset for encoder validation; not included in this repository. See "External reference data" below. |
 | `results/mff_metrics_per_seed.csv` | Per-split MAE, R² and RMSE of all models. The `UmAS_nature2010` rows are a trial restricted to the 42 reactions of Johnston 2010 and are not used in the SI |
 | `results/control_sbr_like_features_metrics_per_seed.csv` | Per-split values of the control models |
 | `results/mff_predictions_test.csv` | Prediction for every test reaction (seed, reaction_id, y_true, y_pred) |
 | `results/splits_70_30_seed0-9.csv` | The splits used (by reaction_id) |
 | `results/validation_doyle_rf500_sqrt.csv` | R² on the Buchwald-Hartwig data with the fast setting (2048 bits, max_features=sqrt), ten splits, mean 0.927 |
+
+### External reference data (optional)
+
+The Buchwald–Hartwig reference dataset used for encoder validation (`Dreher_and_Doyle_input_data.xlsx`) is not redistributed in this repository.
+
+The reference dataset is available from the supplementary materials associated with the original MFF publication:
+
+Sandfort, F.; Strieth-Kalthoff, F.; Kühnemund, M.; Beecks, C.; Glorius, F. *A Structure-Based Platform for Predicting Chemical Reactivity.* Chem **2020**, *6*, 1379–1390.
+
+https://doi.org/10.1016/j.chempr.2020.02.017
+
+To reproduce the optional validation, obtain the corresponding reference file from the supplementary materials and place it at:
+
+`mff_benchmark/data/reference/Dreher_and_Doyle_input_data.xlsx`
+
+Then run `scripts/validate_doyle.py` from the `mff_benchmark/` directory.
+
+**The reference dataset is not required to reproduce the MFF benchmark results for the four SBR reaction datasets or the statistical analyses reported in the SI.**
 
 ### How to run
 
