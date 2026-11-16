@@ -1,0 +1,18 @@
+{
+  "test_size": 0.3,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "fp_length": 3096,
+  "n_trees": 1000,
+  "rf": "max_features=1.0,max_depth=10000,min_samples_split=2,random_state=42"
+}
