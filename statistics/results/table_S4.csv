@@ -1,0 +1,37 @@
+model,dataset,mean_MAE,sd_MAE,mean_R2,sd_R2
+SBR-C2,RedAm,4.205,0.474,0.385,0.087
+SBR-C2,DeaminoCpl,8.186,1.273,0.131,0.154
+SBR-C2,ElectroCpl,12.383,2.213,0.075,0.175
+SBR-C2,UmAS,8.841,0.567,0.308,0.092
+SBR-2,RedAm,3.94,0.414,0.433,0.079
+SBR-2,DeaminoCpl,8.318,1.527,0.115,0.195
+SBR-2,ElectroCpl,12.619,2.137,0.039,0.188
+SBR-2,UmAS,9.009,0.68,0.265,0.123
+SBR-2P,RedAm,3.969,0.433,0.427,0.111
+SBR-2P,DeaminoCpl,7.987,1.457,0.189,0.149
+SBR-2P,ElectroCpl,12.931,1.807,-0.018,0.18
+SBR-2P,UmAS,8.245,0.727,0.36,0.11
+SBR-3,RedAm,3.957,0.408,0.446,0.109
+SBR-3,DeaminoCpl,8.069,1.413,0.193,0.145
+SBR-3,ElectroCpl,12.614,1.925,0.043,0.133
+SBR-3,UmAS,8.317,0.719,0.363,0.111
+MFF (random forest),RedAm,4.204,0.329,0.403,0.072
+MFF (random forest),DeaminoCpl,7.442,1.475,0.268,0.173
+MFF (random forest),ElectroCpl,11.903,2.026,0.092,0.141
+MFF (random forest),UmAS,8.364,0.343,0.387,0.091
+MFF + ElasticNet,RedAm,4.284,0.379,0.368,0.086
+MFF + ElasticNet,DeaminoCpl,8.23,1.187,0.187,0.179
+MFF + ElasticNet,ElectroCpl,12.117,1.941,0.085,0.2
+MFF + ElasticNet,UmAS,8.745,0.419,0.336,0.097
+SBR-2 features + random forest,RedAm,3.84,0.495,0.44,0.142
+SBR-2 features + random forest,DeaminoCpl,8.601,1.38,0.012,0.142
+SBR-2 features + random forest,ElectroCpl,12.243,2.258,0.058,0.191
+SBR-2 features + random forest,UmAS,8.257,0.617,0.381,0.137
+Null mean,RedAm,5.667,0.457,-0.038,0.039
+Null mean,DeaminoCpl,9.276,0.771,-0.065,0.103
+Null mean,ElectroCpl,12.642,2.297,-0.044,0.054
+Null mean,UmAS,11.582,1.082,-0.02,0.028
+Null median,RedAm,5.678,0.488,-0.045,0.049
+Null median,DeaminoCpl,8.866,1.026,-0.036,0.03
+Null median,ElectroCpl,12.523,2.31,-0.046,0.045
+Null median,UmAS,11.542,1.103,-0.012,0.016
