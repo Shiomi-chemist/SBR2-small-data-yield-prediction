@@ -75,6 +75,10 @@ Sandfort, F.; Strieth-Kalthoff, F.; Kühnemund, M.; Beecks, C.; Glorius, F. *A S
 
 https://doi.org/10.1016/j.chempr.2020.02.017
 
+The original supplementary materials, including the input data archive (`Input Data All`), are also available from the authors' ChemRxiv preprint:
+
+https://doi.org/10.26434/chemrxiv.9981488.v1
+
 To reproduce the optional validation, obtain the corresponding reference file from the supplementary materials and place it at:
 
 `mff_benchmark/data/reference/Dreher_and_Doyle_input_data.xlsx`
